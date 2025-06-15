@@ -1,0 +1,323 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+    min-height: 100vh;
+    flex-direction: column; 
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 30%), 
+                radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.05) 0%, transparent 30%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+header {
+    text-align: center;
+    color: #1a1a1a;
+    background-color: transparent;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    z-index: 10;
+}
+
+header h1 {
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    font-size: 1.8em;
+}
+
+.login-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    margin: auto; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.forma-login {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+}
+.forma-login button:hover:not(.selecionado) {
+    background-color: #dcdcdc;
+    color: #333;
+}
+
+.aluno,
+.professor {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+    color: #666;
+}
+
+.selecionado {
+    background-color: white;
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-div {
+    position: relative; 
+    margin-bottom: 20px;
+}
+
+.input-div > i:first-child {
+    position: absolute;
+    top: 50%;
+    left: 15px;  
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: #999;
+    pointer-events: none;  
+}
+
+.input-div input {
+    width: 100%;
+    padding: 12px;
+    padding-left: 45px;  
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: #333;
+    background-color: #fcfcfc;
+}
+
+.input-div input:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 3px rgba(255, 215, 0, 0.5);
+    border-color: #ffd700;
+}
+
+#password {
+    padding-right: 45px;  
+}
+
+#btn-senha {
+    position: absolute; 
+    right: 15px;  
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4em;
+    color: #999;
+    cursor: pointer; 
+    pointer-events: all;  
+    z-index: 2;  
+    background-color: transparent;  
+    transition: color 0.2s ease;
+}
+
+#btn-senha:hover {
+    color: #555;
+}
+.password-tip,.login-tip {
+    display: block; 
+    font-size: 0.8em; 
+    color: #666; 
+    margin-bottom: 15px;
+    text-align: left; 
+}
+.btn-login {
+    font-size: 1.2em;
+    padding: 12px;
+    color: #1a1a1a;
+    background-color: #ffd700;
+    border: none;
+    border-radius: 8px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 700;
+}
+
+.btn-login:hover {
+    background-color: #ffc107;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.sobre {
+    display: block;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 15px;
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sobre:hover {
+    cursor: pointer;
+    color: #ffd700;
+    text-decoration: underline; 
+}
+
+#alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    pointer-events: none;  
+    max-width: 350px;
+    display: flex;  
+    flex-direction: column;
+    gap: 10px;  
+}
+
+.alerta {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1em;  
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);  
+    pointer-events: auto; 
+    color: white;  
+    min-width: 250px;  
+    justify-content: space-between;  
+    box-sizing: border-box;  
+}
+
+.alerta:not(.sucesso) {  
+    background-color: #e74c3c;  
+    border: 1px solid #c0392b; 
+}
+
+.alerta.sucesso {
+    background-color: #2ecc71; 
+    border: 1px solid #27ae60;  
+}
+
+.alerta,
+.alerta * {
+    color: white !important;  
+}
+
+.alerta i {
+    cursor: pointer;
+    font-size: 1.2em;  
+    margin-left: 15px;  
+    transition: color 0.2s ease;
+}
+
+.alerta i:hover {
+    color: rgba(255, 255, 255, 0.8);  
+}
+
+.alerta.remover {
+    opacity: 0;
+    transform: translateX(100%);  
+    transition: all 0.5s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);  
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+footer {
+    background-color: #1a1a1a;  
+    color: #f0f0f0;  
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; 
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    position: relative;  
+    bottom: 0;
+    left: 0;
+    margin-top: auto; 
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; 
+    padding: 0 20px; 
+}
+
+footer p {
+    margin: 0; 
+    font-size: 0.9em;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px; 
+}
+
+.social-icons a {
+    color: #f0f0f0;
+    font-size: 1.4em; 
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ffd700; 
+}

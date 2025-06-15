@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkc2D9w7nDbeRZAyTqbtln1TrKHnEoUpp4gQ&s">
+    <link rel="stylesheet" href="/SiteEscola/Inicio.Css">
+    <link rel="stylesheet" href="style.css">
+    <title>C.E.M.D-Colégio Estadual Maria Dalila</title>
+</head>
+<body>
+     <aside>
+        <h2>C.E.M.D</h2>
+        <div class="icone-div selecionado" data-section="inicio"><i class="bi bi-house"></i><span>Início</span></div>
+        <div class="icone-div" data-section="notas"><i class="bi bi-book"></i><span>Notas</span></div>
+        <div class="icone-div" data-section="avisos"><i class="bi bi-bell"></i><span>Avisos</span></div>
+        <div class="icone-div" data-section="perfil"><i class="bi bi-person"></i><span>Perfil</span></div>
+        <div class="icone-div" data-section="sobre"><i class="bi bi-info-circle"></i><span>Sobre Nós</span></div>
+        <footer>
+            <div class="icone-div" id="sair"><i class="bi bi-box-arrow-left"></i><span>Sair</span></div>
+        </footer>
+    </aside>
+
+    <main>
+        <section id="inicio" class="ativo fade-in delay-100">
+            <div class="presenca-container">
+                <div class="frequencia">
+                    <h3>Frequência</h3>
+                    <div class="barra">
+                        <div class="presenca" style="width: 85%;">Presença: 85%</div>
+                    </div>
+                    <p class="faltas">Faltas: 15%</p>
+                </div>
+            </div>
+            <div class="both-container">
+                <div class="calendario-container">
+                    <div class="alinhar">
+                        <h2>Calendário</h2>
+                        <button id="mostrar-adicionar-evento-btn"><i class="bi bi-plus"></i> Adicionar Evento</button>
+                        <div class="modal-evento" id="modalEvento" style="display: none;">
+                            <div class="modal-conteudo">
+                                <span class="fechar-modal">&times;</span>
+                                <h2>Adicionar Evento</h2>
+                                <p>Preencha os detalhes do evento que deseja adicionar ao calendário.</p>
+                                <label for="titulo">Título</label>
+                                <input type="text" id="titulo" placeholder="Ex: Prova de Matemática">
+                                <label for="dataEvento">Data</label>
+                                <input type="date" id="dataEvento">
+                                <label for="tipo">Tipo</label>
+                                <select id="tipo">
+                                    <option value="Avaliação">Avaliação</option>
+                                    <option value="Reunião">Reunião</option>
+                                    <option value="Atividade">Atividade</option>
+                                </select>
+                                <label for="descricao">Descrição</label>
+                                <textarea id="descricao" placeholder="Descrição do evento"></textarea>
+                                <div class="modal-botoes">
+                                    <button class="cancelar">Cancelar</button>
+                                    <button class="salvar">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="calendario-container">
+                        <div id="calendario">
+                            <div class="mes">
+                                <a href="#" id="mes-left"><i class="bi bi-chevron-left"></i></a>
+                                <span id="nome-mes"></span>
+                                <a href="#" id="mes-right"><i class="bi bi-chevron-right"></i></a>
+                            </div>
+                            <div class="dias-semana">
+                                <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+                            </div>
+                            <hr />
+                            <div class="dias"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento-container">
+                    <span class="dia-event"></span>
+                    <span class="event-do-dia"></span>
+                    <div id="eventos">
+                        <h3>Eventos para o dia <span id="dia-selecionado"></span></h3>
+                        <ul id="lista-eventos"><li>Selecione um dia para ver os eventos.</li></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="notas" class="fade-in delay-200">
+            <div class="main-content">
+                <div class="page-title">
+                    <h1>Notas e Boletim</h1>
+                </div>
+                <div class="select-tri">
+                    <button id="btn-1-tri" class="btn-trimestre">1º Trimestre</button>
+                    <button id="btn-2-tri" class="btn-trimestre">2º Trimestre</button>
+                    <button id="btn-3-tri" class="btn-trimestre">3º Trimestre</button>
+                </div>
+                <div id="materias-container" class="materias-grid">
+                </div>
+                <div id="detalhes-materia-view" class="detalhes-materia-view">
+                    <div class="detalhes-header">
+                        <button id="btn-voltar"><i class="bi bi-arrow-left"></i> Voltar</button>
+                        <span id="detalhes-trimestre-info">1º Trimestre</span>
+                    </div>
+                    <div id="detalhes-materia-conteudo">
+                    </div>
+                </div>
+            </div>
+            <div id="alert-container"></div>
+        </section>
+
+        <section id="avisos" class="fade-in delay-300">
+            <div class="avisos-header">
+                <h1>Avisos</h1>
+                <button id="btn-criar-aviso" class="btn-criar-aviso"><i class="bi bi-plus-circle"></i> Criar Aviso</button>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="todos">Todos</button>
+                <button class="filter-btn" data-category="evento">Evento</button>
+                <button class="filter-btn" data-category="informativo">Informativo</button>
+                <button class="filter-btn" data-category="academico">Acadêmico</button>
+                <button class="filter-btn" data-category="urgente">Urgente</button>
+            </div>
+
+            <div class="avisos-list">
+                <div class="aviso-item evento">
+                    <div class="aviso-meta">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Reunião de Pais e Mestres</span>
+                        <span class="date">25/05/2025, 19:00</span>
+                    </div>
+                    <p class="aviso-text">Convidamos todos os responsáveis para a reunião de pais e mestres que acontecerá no próximo dia 25/05, às 19h. A presença é muito importante para discutirmos o desempenho dos alunos.</p>
+                </div>
+
+                <div class="aviso-item informativo">
+                    <div class="aviso-meta">
+                        <i class="bi bi-info-circle"></i>
+                        <span>Cronograma de Provas do 2º Trimestre</span>
+                        <span class="date">18/05/2025, 10:15</span>
+                    </div>
+                    <p class="aviso-text">O cronograma de provas do segundo trimestre já está disponível no portal. As avaliações começarão no dia 10/06.</p>
+                </div>
+
+                <div class="aviso-item academico">
+                    <div class="aviso-meta">
+                        <i class="bi bi-mortarboard"></i>
+                        <span>Entrega de Trabalho de Geografia</span>
+                        <span class="date">17/05/2025, 08:45</span>
+                    </div>
+                    <p class="aviso-text">Lembramos que o prazo para entrega do trabalho sobre 'Urbanização e Meio Ambiente' é dia 24/05.</p>
+                </div>
+
+                <div class="aviso-item evento">
+                    <div class="aviso-meta">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Campanha de Arrecadação</span>
+                        <span class="date">15/05/2025, 14:30</span>
+                    </div>
+                    <p class="aviso-text">Nossa escola está organizando uma campanha de arrecadação de alimentos não perecíveis para doação. As doações podem ser entregues na secretaria até o dia 30/05.</p>
+                </div>
+
+                <div class="aviso-item urgente">
+                    <div class="aviso-meta">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>Alteração no Horário das Aulas</span>
+                        <span class="date">14/05/2025, 17:20</span>
+                    </div>
+                    <p class="aviso-text">Informamos que na próxima segunda-feira (27/05) as aulas terminarão às 11h30 devido a uma reunião pedagógica.</p>
+                </div>
+
+                </div>
+                <div class="modal-criar-aviso" id="modalCriarAviso" style="display: none;">
+        <div class="modal-conteudo">
+            <span class="fechar-modal-aviso">&times;</span>
+            <h2>Criar Novo Aviso</h2>
+            <p>Preencha os detalhes para criar um novo aviso.</p>
+
+            <label for="tituloAviso">Título do Aviso</label>
+            <input type="text" id="tituloAviso" placeholder="Ex: Fechamento da Escola">
+
+            <label for="dataAviso">Data</label>
+            <input type="date" id="dataAviso">
+
+            <label for="horaAviso">Hora</label>
+            <input type="time" id="horaAviso">
+
+            <label for="categoriaAviso">Categoria</label>
+            <select id="categoriaAviso">
+                <option value="evento">Evento</option>
+                <option value="informativo">Informativo</option>
+                <option value="academico">Acadêmico</option>
+                <option value="urgente">Urgente</option>
+            </select>
+
+            <label for="descricaoAviso">Descrição</label>
+            <textarea id="descricaoAviso" placeholder="Detalhes completos do aviso"></textarea>
+
+            <div class="modal-botoes">
+                <button class="cancelar-aviso">Cancelar</button>
+                <button class="salvar-aviso">Salvar Aviso</button>
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <section id="perfil" class="fade-in delay-400">
+            <div class="container">
+                <h1 class="page-title">Meu Perfil</h1>
+                <div class="profile-grid">
+                    <div class="card student-info-card fade-in">
+                        <div class="card-header">
+                            <i class="icon-large bi bi-person-circle" id="icon-large"></i>
+                            <h2>Informações do Aluno</h2>
+                        </div>
+                        <p class="card-subtitle">Dados cadastrais do aluno</p>
+                        <div class="info-section">
+                            <div class="info-group">
+                                <label class="info-label">Nome Completo</label>
+                                <p class="info-text">João da Silva Pereira</p>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">CGM</label>
+                                <p class="info-text">12345678</p>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">RG</label>
+                                <p class="info-text">12.345.678-9</p>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-group">
+                                <label class="info-label">Data de Nascimento</label>
+                                <p class="info-text">14/03/2008</p>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">E-mail</label>
+                                <p class="info-text">joao.silva@escola.pr.gov.br</p>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">Telefone</label>
+                                <p class="info-text">(43) 99999-8888</p>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-group full-width">
+                                <label class="info-label">Endereço</label>
+                                <p class="info-text">Rua das Flores, 123 - Centro</p>
+                            </div>
+                        </div>
+
+                        <div class="info-section no-bottom-margin">
+                            <div class="info-group">
+                                <label class="info-label">Responsável</label>
+                                <p class="info-text">Maria Pereira</p>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">Telefone do Responsável</label>
+                                <p class="info-text">(43) 99999-7777</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar">
+                        <div class="card academic-info-card fade-in delay-100">
+                            <div class="card-header">
+                                <i class="bi bi-mortarboard-fill icon-large"></i></i>
+                                <h2>Informações Acadêmicas</h2>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">Turma</label>
+                                <p class="info-text">9º Ano A</p>
+                            </div>
+                            <div class="info-group">
+                                <label class="info-label">Turno</label>
+                                <p class="info-text">Manhã</p>
+                            </div>
+                        </div>
+
+                        <div class="card session-card fade-in delay-200">
+                            <h2>Sessão</h2>
+                            <button id="sairDoSistema" class="logout-button hvr-float-shadow">
+                                <i class="bi bi-box-arrow-left"></i> Sair do Sistema
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="fade-in delay-500">
+            <section id="sobre" class="fade-in delay-500">
+            <div class="about-grid">
+                <div class="main-about-content">
+                    <h1 class="section-title">Sobre Nós</h1>
+                    <p class="intro-text">
+                        Fundado em 2003, o Colégio Estadual Maria Dalila Pinto (C.E.M.D) nasceu com a missão de oferecer educação
+                        de qualidade e formar cidadãos comprometidos com o desenvolvimento social. Ao longo de mais de duas
+                        décadas, construímos uma trajetória pautada pela excelência acadêmica e pelos valores humanos.
+                    </p>
+                    <p class="intro-text">
+                        Começamos com apenas 5 salas de aula e 120 alunos. Hoje, contamos com uma infraestrutura completa e
+                        moderna, atendendo mais de 1.500 estudantes do Ensino Fundamental e Médio, mantendo sempre o
+                        compromisso com a qualidade do ensino e a formação integral dos nossos alunos.
+                    </p>
+
+                    <h2 class="sub-section-title">Missão, Visão e Valores</h2>
+                    <div class="mvv-cards">
+                        <div class="mvv-card">
+                            <h3>Missão</h3>
+                            <p>Oferecer educação de qualidade, formando cidadãos críticos, éticos e preparados para os desafios
+                                do mundo contemporâneo.</p>
+                        </div>
+                        <div class="mvv-card">
+                            <h3>Visão</h3>
+                            <p>Ser referência em educação, reconhecida pela excelência acadêmica e pela formação integral dos
+                                estudantes.</p>
+                        </div>
+                        <div class="mvv-card">
+                            <h3>Valores</h3>
+                            <p>Ética, respeito, solidariedade, responsabilidade social, excelência e inovação.</p>
+                        </div>
+                    </div>
+
+                    <h2 class="sub-section-title">Nossa Proposta Pedagógica</h2>
+                    <p class="pedagogical-text">
+                        Nossa abordagem educacional busca integrar o desenvolvimento cognitivo, socioemocional e ético dos
+                        estudantes. Acreditamos em uma educação que vai além dos conteúdos acadêmicos, formando indivíduos
+                        completos, preparados para os desafios pessoais e profissionais do século XXI.
+                    </p>
+                    <p class="pedagogical-text">
+                        No C.E.M.D, nossas práticas pedagógicas incluem metodologias ativas, projetos interdisciplinares, uso de
+                        tecnologias educacionais e estímulo ao protagonismo estudantil. Valorizamos a participação da família no
+                        processo educativo e mantemos um ambiente acolhedor e estimulante para a aprendizagem.
+                    </p>
+
+                    <h2 class="sub-section-title">Destaques e Conquistas</h2>
+                    <div class="highlights-grid">
+                        <div class="highlight-item fade-in delay-400">
+                            <i class="bi bi-lightbulb-fill"></i>
+                            <h4>Olimpíadas de Conhecimento</h4>
+                            <p>Medalhas em olimpíadas nacionais de matemática e ciências</p>
+                        </div>
+                        <div class="highlight-item fade-in delay-500">
+                            <i class="bi bi-trophy-fill"></i>
+                            <h4>Aprovações</h4>
+                            <p>Alto índice de aprovação em universidades públicas e privadas</p>
+                        </div>
+                        <div class="highlight-item fade-in delay-600">
+                            <i class="bi bi-brush-fill"></i>
+                            <h4>Projetos Culturais</h4>
+                            <p>Premiações em festivais de arte, literatura e música</p>
+                        </div>
+                        <div class="highlight-item fade-in delay-700">
+                            <i class="bi bi-people-fill"></i>
+                            <h4>Projetos Sociais</h4>
+                            <p>Iniciativas comunitárias reconhecidas pela Secretaria de Educação</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-sidebar">
+                    <div class="info-card">
+                        <h3>Informações Rápidas</h3>
+                        <div class="info-group-list">
+                            <div class="info-entry">
+                                <i class="bi bi-book"></i>
+                                <strong>Níveis de Ensino</strong>
+                                <p>Ensino Fundamental e Médio</p>
+                            </div>
+                            <div class="info-entry">
+                                <i class="bi bi-clock"></i>
+                                <strong>Horários</strong>
+                                <p>Manhã: 7h10 às 12h30</p>
+                                <p>Tarde: 13h às 18h20</p>
+                            </div>
+                            <div class="info-entry">
+                                <i class="bi bi-geo-alt"></i>
+                                <strong>Endereço</strong>
+                                <p>Rua Vicente Gois Cintra, 180 - Jardim Bela Vista</p>
+                                <p>CEP:86430-000</p>
+                            </div>
+                            <div class="info-entry">
+                                <i class="bi bi-calendar"></i>
+                                <strong>Calendário</strong>
+                                <p>Ano letivo: Fevereiro a Dezembro</p>
+                                <p>Férias: Janeiro e Julho</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Entre em Contato</h3>
+                        <div class="contact-info">
+                            <p><i class="bi bi-telephone"></i>Telefone:(43) 3534-4409</p>
+                            <p><i class="bi bi-envelope"></i> E-mail: <a href="mailto:contato@cemd.edu.br">contato@cemd.edu.br</a></p>
+                            <p><i class="bi bi-whatsapp"></i> WhatsApp: (43) 99999-0000</p>
+                        </div>
+                        <button class="access-portal-btn hvr-float-shadow">Acessar o Portal</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <div id="alerta-desconectado" class="alerta-desconectado">
+        <i class="fas fa-info-circle"></i> Você foi desconectado. Redirecionando...
+    </div>
+    </section>
+  </main>
+</body>
+<div class="footer">
+<div class="footer-content">
+        <p>&copy; 2025 C.E.M.D - Todos os direitos reservados.</p>
+        <div class="social-icons">
+            <a href="#" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        </div>
+        </div>
+    </div>
+    <script src="/SiteEscola/Inicio.Js"></script>
